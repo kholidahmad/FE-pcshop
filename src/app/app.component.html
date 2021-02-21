@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xl-8 col-sm-12 m-auto">
+      <h1 class="text-center mt-5 mb-3">
+        <strong><i class="fab fa-shopify orange mr-2"></i> SyopAja</strong>
+      </h1>
+      <h5 class="text-center">shop whatever, whenever, wherever you want</h5>
+      <button
+        class="btn btn-block mt-5 mb-3 bg-orange"
+        data-toggle="modal"
+        data-backdrop="static"
+        data-keyboard="false"
+        data-target="#playlistModal"
+        (click)="clickAdd()"
+      >
+        <strong class="text-white"
+          ><i class="fas fa-cart-plus mr-2 text-white"></i> Add New
+          Order</strong
+        >
+      </button>
+      <hr />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-8 col-sm-12 m-auto">
+      <div class="card mb-3" *ngFor="let order of orders; let i = index">
+        <div class="card-body">
+          <strong class="card-title" style="font-size: larger"
+            ><i class="fas fa-dollar-sign"></i> {{ order.totalPrice }} </strong
+          ><br />
+          <small class="card-subtitle mb-2 text-muted"
+            >By {{ order.customerName }} | {{ order.email }}
+          </small>
+          <p class="card-text mt-3"></p>
+          <hr />
+          <div class="row mb-3" *ngFor="let item of order.items">
+            <div class="col-1">
+              <div>
+                <i class="fas fa-tags orange ml-3 mr-2 mt-2"></i>
+              </div>
+            </div>
+            <div class="col-11">
+              <span style="font-size: larger"> {{ item.category }} </span>
+              <br />
+              <span style="font-size: smaller">
+                {{ item.name }} ~
+                <i class="fas fa-dollar-sign" style="font-size: x-small"></i
+                >{{ item.price }}
+              </span>
+            </div>
+          </div>
+          <hr />
+          <a type="button" class="card-link text-secondary mr-3" clickDelete>
+            DELETE</a
+          >
+          <a
+            type="button"
+            data-toggle="modal"
+            data-backdrop="static"
+            data-keyboard="false"
+            data-target="#playlistModal"
+            class="card-link text-warning"
+            (click)="clickEdit(i)"
+            >EDIT</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="playlistModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 20px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ modalTilte }}</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="clickClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-edit [orderEdit]="orderEdit" *ngIf="addedit"></app-edit>
+      </div>
+    </div>
+  </div>
+</div>
