@@ -25,9 +25,12 @@ export class EditComponent implements OnInit {
   category: any;
 
   slctchange: any = [];
-  slctNamechange: any = [];
+  slctNamechange: any;
   isItemName: boolean = false;
   selectItemName: any[] = [];
+
+  name: string = '';
+  price: number = 0;
 
   constructor(private shopservis: ShopService) {}
 
@@ -49,6 +52,7 @@ export class EditComponent implements OnInit {
     let videoCardList = this.shopservis.videoCardList;
     let memoryList = this.shopservis.memoryList;
     this.selectItemName = []; //reset select dulu.
+    // this.price = 0;
     switch (x) {
       case 'CPU':
         for (const i in cpuList) {
@@ -82,7 +86,12 @@ export class EditComponent implements OnInit {
   }
 
   changeSelectName(e: any) {
-    this.slctchange = e.target.value;
+    let data = e.target.value;
+    let dataSplit = data.split('|');
+    let name = dataSplit[0];
+    let price = dataSplit[1];
+    this.name = name;
+    this.price = price;
   }
 
   private initForm() {

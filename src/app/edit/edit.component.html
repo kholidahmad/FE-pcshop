@@ -42,11 +42,19 @@
                 </div>
                 <div class="col-xl-3">
                   <label for="name">Select Item</label>
-                  <select class="form-control" formControlName="name">
+                  <select
+                    class="form-control"
+                    formControlName="name"
+                    (click)="changeSelectName($event)"
+                  >
                     <ng-container
                       *ngFor="let slItemName of selectItemName; let i = index"
                     >
-                      <option>{{ slItemName.name }}</option>
+                      <option
+                        value="{{ slItemName.name }}|{{ slItemName.price }}"
+                      >
+                        {{ slItemName.name }}
+                      </option>
                     </ng-container>
                   </select>
                 </div>
@@ -57,6 +65,7 @@
                     type="number"
                     formControlName="price"
                     class="form-control mb-3"
+                    [value]="price"
                   />
                 </div>
                 <div class="col-xl-3">
